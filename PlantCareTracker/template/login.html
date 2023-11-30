@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <title>Signup Page</title>
+    {%load static%}
+    <link rel="stylesheet" href="{%static 'login.css'%}" />
+  </head>
+  <body>
+    <center><h1>Login Form</h1></center>
+    <form action="#" method="post">
+      {% csrf_token %}
+      <center>
+        <div class="container">
+          <div class="imgcontainer">
+            <img
+              src="{%static 'login-image.jpg'%}"
+              alt="Avatar"
+              class="avatar"
+            />
+          </div>
+          <label for="email"><b>UserEmail : </b></label>
+          <input
+            type="email"
+            placeholder="Enter email"
+            name="email"
+            float="right"
+            required
+          /><br />
+          <label for="password"><b>Password : </b></label>
+          <input
+            type="password"
+            placeholder="Enter Password"
+            name="password"
+            required
+          /><br />
+          <button type="submit"><b>Login</b></button><br />
+          Don't have accounct
+          <a href="http://localhost:8000/signup/"> register </a>
+        </div>
+      </center>
+    </form>
+  </body>
+</html>
