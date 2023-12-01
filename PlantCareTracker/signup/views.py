@@ -22,10 +22,11 @@ def signup(request):
                 email = val
             if key == 'password':
                 password = val
-        userId = 0
-        query ='SELECT userID FROM users ORDER BY userID DESC LIMIT 1;'
-        userId = cursor.execute(query)
+        cursor.execute("SELECT userID FROM users ORDER BY userID DESC LIMIT 1;")
+        userId = cursor.fetchone()[0]
         userId = userId + 1
-        cursor.execute("insert into users values('{}', '{}', '{}', '{}', '{}')".format(userId, fName, lName, email, password))
+        cursor.execute("insert into users values({}, '{}', '{}', '{}', '{}')".format(userId, fName, lName, email, password))
+        query2 = "CREATE TABLE `{}` (linkedUserID INT, plantName varchar(100), species varchar(100), carelevel varchar(50), waterschedule varchar(50), FOREIGN KEY (linkedUserID) REFERENCES users(userID))".format(userId)
+        cursor.execute(query2)
         mydb.commit()
     return render(request, 'signup.html')
