@@ -22,6 +22,10 @@ def signup(request):
                 email = val
             if key == 'password':
                 password = val
-        cursor.execute("insert into users values('{}', '{}', '{}', '{}')".format(fName, lName, email, password))
+        userId = 0
+        query ='SELECT userID FROM users ORDER BY userID DESC LIMIT 1;'
+        userId = cursor.execute(query)
+        userId = userId + 1
+        cursor.execute("insert into users values('{}', '{}', '{}', '{}', '{}')".format(userId, fName, lName, email, password))
         mydb.commit()
     return render(request, 'signup.html')

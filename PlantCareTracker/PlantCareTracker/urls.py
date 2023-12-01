@@ -17,9 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from signup.views import signup
-from login.views import login
+from login.views import login, add_plant
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('signup/', signup),
     path('login/', login),
+    path('add_plant/', add_plant),
 ]
