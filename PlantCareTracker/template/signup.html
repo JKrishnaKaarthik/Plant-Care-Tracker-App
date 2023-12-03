@@ -1,14 +1,17 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Signup Page</title>
     {%load static%}
     <link rel="stylesheet" href="{%static 'signup.css'%}" />
+    <title>Document</title>
   </head>
   <body>
-    <center><h1>Sign up Form</h1></center>
-    <form action="#" method="post">
-      {% csrf_token %}
-      <center>
+    <div id="signup-main">
+      <form action="#" method="post">
+        {% csrf_token %}
         <div class="container">
           <div class="imgcontainer">
             <img
@@ -17,24 +20,18 @@
               class="avatar"
             />
           </div>
-          <!-- <label for="firstName"><b>First Name : </b></label>
-          <br /> -->
           <input
             type="text"
             placeholder="Enter your first name"
             name="firstName"
             required
           /><br />
-          <!-- <label for="lastName"><b>Last Name :</b></label>
-          <br /> -->
           <input
             type="text"
             placeholder="Enter your last name"
             name="lastName"
             required
           /><br />
-          <!-- <label for="email"><b>Email Id : </b></label>
-          <br /> -->
           <input
             type="email"
             placeholder="Enter email"
@@ -42,8 +39,6 @@
             float="right"
             required
           /><br />
-          <!-- <label for="password"><b>Password : </b></label>
-          <br /> -->
           <input
             type="password"
             placeholder="Enter Password"
@@ -51,9 +46,16 @@
             required
           /><br />
           <button type="submit"><b>Signup</b></button><br />
-          Already an accounct <a href="http://localhost:8000/login/"> Login </a>
+          <p>Existing User?</p>
+          <button onclick="redirectToPage()">Login</button>
+          <script>
+            function redirectToPage() {
+              // Replace 'destination.html' with the URL you want to redirect to
+              window.location.href = "/";
+            }
+          </script>
         </div>
-      </center>
-    </form>
+      </form>
+    </div>
   </body>
 </html>
