@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const appElement = document.getElementById("app");
   const state = {
     newPlant: {
+      id: "",
       name: "",
       species: "",
       careLevel: "",
@@ -86,13 +87,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   window.addPlant = function () {
     console.log("A plant is added");
-    const nameInput = document.getElementById("name");
-    const speciesInput = document.getElementById("species");
-    const careLevelInput = document.getElementById("careLevel");
-    const waterScheduleInput = document.getElementById("waterSchedule");
+    const nameInput = document.querySelector('input[name="name"]');
+    const speciesInput = document.querySelector('input[name="species"]');
+    const careLevelInput = document.querySelector('input[name="careLevel"]');
+    const waterScheduleInput = document.querySelector(
+      'input[name="waterSchedule"]'
+    );
 
     const newPlant = {
-      id: state.plants.length + 1,
+      id: state.plants[state.plants.length - 1].id + 1,
       name: nameInput.value,
       species: speciesInput.value,
       careLevel: careLevelInput.value,
@@ -112,7 +115,6 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Failed to add plant:", xhr.status, xhr.statusText);
       }
     };
-
     // Convert the JavaScript object to a JSON string and send it in the request body
     xhr.send(JSON.stringify(newPlant));
     state.plants.push(newPlant);
@@ -132,7 +134,27 @@ document.addEventListener("DOMContentLoaded", function () {
       state.plants.splice(index, 1);
       render();
     }
-  };
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "/remove_plant/", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
 
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        if (xhr.responseText) {
+          const responseData = JSON.parse(xhr.responseText);
+          console.log("data transferred", responseData);
+          // Request was successful, you can handle the response here if needed
+          render();
+        } else {
+          console.error("Empty response received");
+        }
+      } else {
+        // Request failed, handle the error
+        console.error("Failed to remove plant:", xhr.status, xhr.statusText);
+      }
+    };
+    // Convert the JavaScript object to a JSON string and send it in the request body
+    xhr.send(JSON.stringify({ id: id }));
+  };
   render();
 });

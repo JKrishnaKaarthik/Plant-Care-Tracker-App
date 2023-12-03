@@ -44,7 +44,7 @@ def get_plant_list(request):
             cursor.execute("select * from {}".format("user"+str(userId)))
             data = cursor.fetchall()
             print(data)
-            plant_list = [{'name': plant[1], 'species': plant[2], 'careLevel': plant[3], 'waterSchedule': plant[4]} for plant in data]
+            plant_list = [{'id' : plant[1], 'name': plant[2], 'species': plant[3], 'careLevel': plant[4], 'waterSchedule': plant[5 ]} for plant in data]
 
             return JsonResponse({'plants': plant_list})
         else:
@@ -67,22 +67,39 @@ def add_plant(request):
         print()
         print(data)
         # Extract plant details
+        plantId = data['id']
         plantName = data['name']
         plantSpecies = data['species']
         plantCareLevel = data['careLevel']
         plantWaterSchedule = data['waterSchedule']
-
-        # Insert data into the MySQL database
-        # c = "INSERT INTO '{}' VALUES ({}, '{}', '{}', '{}', '{}')".format("user"+str(userId), userId, plantName, plantSpecies, plantCareLevel, plantWaterSchedule)
-        # cursor.execute(c)
-        
-        sql_query = "INSERT INTO {} VALUES (%s, %s, %s, %s, %s)".format("user" + str(userId))
-
+        sql_query = "INSERT INTO {} VALUES (%s, %s, %s, %s, %s, %s)".format("user" + str(userId))
         # Tuple of values to insert
-        values = (userId, plantName, plantSpecies, plantCareLevel, plantWaterSchedule)
-
+        values = (userId, plantId, plantName, plantSpecies, plantCareLevel, plantWaterSchedule)
         # Execute the query with the tuple of values
         cursor.execute(sql_query, values)
         mydb.commit()
         return JsonResponse({'status': 'success'})
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
+@csrf_exempt # Apply the decorator to disable CSRF protection for simplicity (handle CSRF properly in production)
+def remove_plant(request):
+    try:
+        if request.method == 'POST':
+            mydb = sql.connect(host='localhost', user='root', passwd='Krishna@511', database='plantdatabase')
+            cursor = mydb.cursor()
+            query1 = "select * from users where email='{}' and password='{}'".format(email, password)
+            cursor.execute(query1)
+            userId = cursor.fetchone()[0]
+            print(userId)
+            # Get JSON data from the request body
+            data = json.loads(request.body)
+            print("Received POST request to remove plant")
+            print(f"Data: {data}")
+            removeQuery = f"DELETE FROM user{userId} WHERE plantId = %s"
+            cursor.execute(removeQuery, (data['id'],))
+            mydb.commit()
+            return JsonResponse({'status': 'success'})
+    except Exception as e:
+        # Log the exception for further analysis
+        print(f"Error: {str(e)}")
+        return JsonResponse({'status': 'error', 'message': 'Internal Server Error'})
     return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
