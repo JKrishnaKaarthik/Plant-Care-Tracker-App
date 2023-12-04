@@ -1,14 +1,17 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Signup Page</title>
     {%load static%}
-    <link rel="stylesheet" href="{%static 'login.css'%}" />
+    <link rel="stylesheet" href="{%static 'loginPage.css'%}" />
+    <title>Document</title>
   </head>
   <body>
-    <center><h1>Login Form</h1></center>
-    <form action="#" method="post">
-      {% csrf_token %}
-      <center>
+    <div class="login-main">
+      <form action="#" method="post">
+        {% csrf_token %}
         <div class="container">
           <div class="imgcontainer">
             <img
@@ -17,7 +20,6 @@
               class="avatar"
             />
           </div>
-          <label for="email"><b>UserEmail : </b></label>
           <input
             type="email"
             placeholder="Enter email"
@@ -25,7 +27,6 @@
             float="right"
             required
           /><br />
-          <label for="password"><b>Password : </b></label>
           <input
             type="password"
             placeholder="Enter Password"
@@ -33,10 +34,15 @@
             required
           /><br />
           <button type="submit"><b>Login</b></button><br />
-          Don't have accounct
-          <a href="http://localhost:8000/signup/"> register </a>
+          <h3>Create Account</h3>
+          <button onclick="redirectToSignUpPage()"><b>Signup</b></button>
+          <script>
+            function redirectToSignUpPage() {
+              window.location.href = "/signup";
+            }
+          </script>
         </div>
-      </center>
-    </form>
+      </form>
+    </div>
   </body>
 </html>

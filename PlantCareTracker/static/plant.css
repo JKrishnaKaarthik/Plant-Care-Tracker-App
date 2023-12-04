@@ -1,0 +1,66 @@
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  /* background-color: rgba(44, 141, 15, 0.801); */
+  /* background-image: url("section-background.jpg"); Replace with the actual path to your image */
+  /* background-repeat: repeat; or 'no-repeat' based on your preference */
+}
+
+header {
+  background-color: #4caf50;
+  color: white;
+  text-align: center;
+  padding: 1em 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.section {
+  margin: 20px;
+  padding: 20px;
+  /* background-color: #a6cb7b; Light Coral */
+  border-radius: 8px;
+  box-shadow: 11px 12px 8px rgba(0, 0, 0, 0.1);
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#plantList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.plant-card {
+  flex: 1;
+  width: calc(33.33% - 60%);
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #17ed1b2f;
+}
+
+/* Add this style to enhance the plant theme background for the cards */
+.plant-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background: url("plant-card.jpg") repeat; Replace with the actual path to your leaf pattern image */
+  opacity: 0.3; /* Adjust the opacity based on your preference */
+  pointer-events: none; /* Ensure the card content is clickable */
+}

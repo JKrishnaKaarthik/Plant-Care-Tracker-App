@@ -95,7 +95,10 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
     const newPlant = {
-      id: state.plants[state.plants.length - 1].id + 1,
+      id:
+        state.plants.length > 0
+          ? state.plants[state.plants.length - 1].id + 1
+          : 1,
       name: nameInput.value,
       species: speciesInput.value,
       careLevel: careLevelInput.value,
