@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
     plants: [],
   };
   function fetchPlantList() {
-    print("entered the fecthplant list function");
     fetch("/get_plant_list/")
       .then((response) => {
         if (!response.ok) {
@@ -37,27 +36,22 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   // Call the function to fetch plant list
   fetchPlantList();
-
   function render() {
     console.log("page is rendering");
     appElement.innerHTML = `
                   <div class="section">
                       <h2>Add a New Plant</h2>
                       <form id="plantForm" class="form" >
-                          <label for="name">Name:</label>
-                          <input type="text" name="name" value="${
+                          <input type="text" name="name" placeholder="Name" value="${
                             state.newPlant.name
                           }" required>
-                          <label for="species">Species:</label>
-                          <input type="text" name="species" value="${
+                          <input type="text" name="species" placeholder="Species" value="${
                             state.newPlant.species
                           }" required>
-                          <label for="careLevel">Care Level:</label>
-                          <input type="text" name="careLevel" value="${
+                          <input type="text" name="careLevel" placeholder="Care Level" value="${
                             state.newPlant.careLevel
                           }" required>
-                          <label for="waterSchedule">Water Schedule:</label>
-                          <input type="text" name="waterSchedule" value="${
+                          <input type="text" name="waterSchedule" placeholder="Water Schedule" value="${
                             state.newPlant.waterSchedule
                           }" required>
                           <button type="button" onclick="addPlant()">Add Plant</button>

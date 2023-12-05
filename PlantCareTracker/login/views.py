@@ -44,7 +44,7 @@ def get_plant_list(request):
             cursor.execute("select * from {}".format("user"+str(userId)))
             data = cursor.fetchall()
             print(data)
-            plant_list = [{'id' : plant[1], 'name': plant[2], 'species': plant[3], 'careLevel': plant[4], 'waterSchedule': plant[5 ]} for plant in data]
+            plant_list = [{'id' : plant[1], 'name': plant[2], 'species': plant[3], 'careLevel': plant[4], 'waterSchedule': plant[5]} for plant in data]
 
             return JsonResponse({'plants': plant_list})
         else:

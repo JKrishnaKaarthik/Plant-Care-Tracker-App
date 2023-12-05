@@ -1,39 +1,74 @@
 body {
-  font-family: "Arial", sans-serif;
+  font-family: Roboto, Arial;
   margin: 0;
   padding: 0;
-  /* background-color: rgba(44, 141, 15, 0.801); */
-  /* background-image: url("section-background.jpg"); Replace with the actual path to your image */
-  /* background-repeat: repeat; or 'no-repeat' based on your preference */
+  background-color: #f4f4f4;
 }
-
 header {
-  background-color: #4caf50;
   color: white;
+  width: 100vh;
+  overflow: hidden;
   text-align: center;
-  padding: 1em 0;
+  padding: 1em;
+  display: flex;
+  align-items: center;
+}
+header img {
+  max-width: 1349px;
+  height: 216px;
+  margin: 0px;
+  border: 0 px;
 }
 
+h1 {
+  margin: 0;
+}
+
+form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+input::placeholder {
+  display: flex;
+  text-align: center;
+  font-weight: 600;
+  color: black;
+}
+input[type="text"] {
+  padding: 10px;
+  border-radius: 8px;
+}
 .container {
   max-width: 800px;
   margin: 0 auto;
+  background-color: #fff; /* White background color for the container */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden; /* Ensure rounded corners are applied to the container */
 }
 
 .section {
   margin: 20px;
   padding: 20px;
-  /* background-color: #a6cb7b; Light Coral */
   border-radius: 8px;
-  box-shadow: 11px 12px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #f8f8f8; /* Light background color for sections */
 }
 
 button {
   background-color: #4caf50;
   color: white;
-  padding: 8px 16px;
+  padding: 10px 20px;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
 }
 
 #plantList {
@@ -43,16 +78,17 @@ button {
 
 .plant-card {
   flex: 1;
-  width: calc(33.33% - 60%);
+  width: calc(50% - 20px);
   margin: 10px;
-  padding: 10px;
+  padding: 20px;
   border: 1px solid #ddd;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #17ed1b2f;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  transition: box-shadow 0.3s ease;
+  position: relative;
 }
 
-/* Add this style to enhance the plant theme background for the cards */
 .plant-card::before {
   content: "";
   position: absolute;
@@ -60,7 +96,25 @@ button {
   left: 0;
   right: 0;
   bottom: 0;
-  /* background: url("plant-card.jpg") repeat; Replace with the actual path to your leaf pattern image */
-  opacity: 0.3; /* Adjust the opacity based on your preference */
-  pointer-events: none; /* Ensure the card content is clickable */
+  opacity: 0.2;
+  background-color: #4caf50;
+  border-radius: 8px;
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.plant-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.plant-card:hover::before {
+  opacity: 0.4;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 600px) {
+  .plant-card {
+    width: 100%;
+  }
 }

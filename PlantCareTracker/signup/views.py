@@ -26,7 +26,7 @@ def signup(request):
         userId = cursor.fetchone()[0]
         userId = userId + 1
         cursor.execute("insert into users values({}, '{}', '{}', '{}', '{}')".format(userId, fName, lName, email, password))
-        query2 = "CREATE TABLE `{}` (linkedUserID INT, plantId INT,plantName varchar(100), species varchar(100), carelevel varchar(50), waterschedule varchar(50), FOREIGN KEY (linkedUserID) REFERENCES users(userID))".format("user"+str(userId))
+        query2 = "CREATE TABLE `{}` (linkedUserID INT, plantId INT, plantName varchar(100), species varchar(100), carelevel varchar(50), waterschedule varchar(200), FOREIGN KEY (linkedUserID) REFERENCES users(userID))".format("user"+str(userId))
         cursor.execute(query2)
         mydb.commit()
         return redirect('/')
